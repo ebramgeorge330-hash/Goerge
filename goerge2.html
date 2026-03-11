@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOERGE | جورج</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Poppins,Cairo;
+background:#f4f6f8;
+color:#333;
+scroll-behavior:smooth;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 10%;
+background:#0c2d48;
+color:white;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav h2{
+margin:0;
+}
+
+nav button{
+padding:8px 14px;
+border:none;
+background:#ff7a00;
+color:white;
+cursor:pointer;
+border-radius:5px;
+}
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://images.unsplash.com/photo-1581092335878-3f3f1f5b3b28?auto=format&fit=crop&w=1400&q=80");
+background-size:cover;
+background-position:center;
+}
+
+.hero h1{
+font-size:55px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
+}
+
+.hero button{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+background:#ff7a00;
+color:white;
+font-size:16px;
+cursor:pointer;
+border-radius:5px;
+}
+
+section{
+padding:70px 10%;
+}
+
+.title{
+text-align:center;
+margin-bottom:40px;
+font-size:32px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card-content{
+padding:15px;
+}
+
+.card button{
+margin-top:10px;
+padding:8px 15px;
+background:#0c2d48;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.about{
+background:#e9edf1;
+text-align:center;
+line-height:1.8;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+.gallery img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.contact{
+background:#0c2d48;
+color:white;
+text-align:center;
+}
+
+.contact form{
+display:flex;
+flex-direction:column;
+max-width:400px;
+margin:auto;
+gap:10px;
+}
+
+.contact input,
+.contact textarea{
+padding:10px;
+border:none;
+border-radius:5px;
+}
+
+.contact button{
+background:#ff7a00;
+border:none;
+padding:10px;
+color:white;
+cursor:pointer;
+}
+
+footer{
+background:#081d30;
+color:white;
+text-align:center;
+padding:15px;
+}
+
+.fade{
+opacity:0;
+transform:translateY(20px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>GOERGE | جورج</h2>
+<button onclick="toggleLang()">AR / EN</button>
+</nav>
+
+<section class="hero">
+<h1 id="title">GOERGE | جورج</h1>
+<p id="subtitle">Engineering Pipes & Industrial Solutions</p>
+<button onclick="scrollToProducts()" id="cta">View Products</button>
+</section>
+
+<section id="products">
+<h2 class="title" id="productsTitle">Products</h2>
+
+<div class="products fade">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1608889175123-8ee3623d4d6d">
+<div class="card-content">
+<h3>Steel Pipes</h3>
+<p>High strength industrial steel pipes.</p>
+<button>View Details</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1597852074816-d933c7d2b988">
+<div class="card-content">
+<h3>PVC Pipes</h3>
+<p>Durable PVC pipes for infrastructure.</p>
+<button>View Details</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1565716173304-2e4c61d8c9ef">
+<div class="card-content">
+<h3>Pipe Fittings</h3>
+<p>Industrial connectors and fittings.</p>
+<button>View Details</button>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1613852348853-7f9a3dbe0d55">
+<div class="card-content">
+<h3>Stainless Steel Pipes</h3>
+<p>Corrosion resistant stainless pipes.</p>
+<button>View Details</button>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="about fade">
+<h2 id="aboutTitle">About Us</h2>
+<p id="aboutText">
+We are an industrial supplier providing high-quality engineering pipes and piping solutions
+for construction and infrastructure projects across Egypt.
+</p>
+</section>
+
+<section>
+<h2 class="title">Gallery</h2>
+<div class="gallery fade">
+<img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc">
+<img src="https://images.unsplash.com/photo-1581092160607-ee22731b23c2">
+<img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232">
+<img src="https://images.unsplash.com/photo-1581093458791-9f3c6bdb9e6f">
+</div>
+</section>
+
+<section class="contact fade">
+<h2 id="contactTitle">Contact Us</h2>
+
+<p>Phone: +20 000000000</p>
+<p>Email: info@goerge.com</p>
+<p>Location: Egypt</p>
+
+<form>
+<input type="text" placeholder="Name">
+<input type="email" placeholder="Email">
+<textarea placeholder="Message"></textarea>
+<button type="submit">Send</button>
+</form>
+
+</section>
+
+<footer>
+© 2026 GOERGE | جورج
+</footer>
+
+<script>
+
+function scrollToProducts(){
+document.getElementById("products").scrollIntoView({behavior:"smooth"});
+}
+
+let arabic=false;
+
+function toggleLang(){
+
+arabic=!arabic;
+
+if(arabic){
+
+document.body.dir="rtl";
+
+document.getElementById("subtitle").innerText="حلول المواسير والهندسة الصناعية";
+document.getElementById("cta").innerText="عرض المنتجات";
+document.getElementById("productsTitle").innerText="المنتجات";
+document.getElementById("aboutTitle").innerText="من نحن";
+document.getElementById("aboutText").innerText=
+"نحن شركة توريد صناعي متخصصة في المواسير الهندسية عالية الجودة ومستلزمات خطوط الأنابيب للمشاريع الصناعية والإنشائية في مصر.";
+
+document.getElementById("contactTitle").innerText="تواصل معنا";
+
+}else{
+
+document.body.dir="ltr";
+
+document.getElementById("subtitle").innerText="Engineering Pipes & Industrial Solutions";
+document.getElementById("cta").innerText="View Products";
+document.getElementById("productsTitle").innerText="Products";
+document.getElementById("aboutTitle").innerText="About Us";
+document.getElementById("aboutText").innerText=
+"We are an industrial supplier providing high-quality engineering pipes and piping solutions for construction and infrastructure projects across Egypt.";
+
+document.getElementById("contactTitle").innerText="Contact Us";
+
+}
+
+}
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+});
+
+document.querySelectorAll(".fade").forEach(el=>{
+observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>

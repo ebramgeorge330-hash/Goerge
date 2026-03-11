@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOERGE | جورج - Engineering Pipes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Cairo:wght@400;700&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #0a192f;
+            --accent-orange: #ff6b00;
+            --light-gray: #f4f4f4;
+            --medium-gray: #333;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body.rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .logo {
+            color: var(--white);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent-orange); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover { color: var(--accent-orange); }
+
+        .lang-toggle {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        .cta-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: var(--transition);
+            border: 2px solid var(--accent-orange);
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            color: var(--accent-orange);
+        }
+
+        /* --- Products Section --- */
+        .section-padding { padding: 100px 10%; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--accent-orange);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border: 1px solid #ddd;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .product-card.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent-orange);
+        }
+
+        .product-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.1); }
+
+        .product-info { padding: 25px; }
+        .product-info h3 { margin-bottom: 10px; color: var(--primary-blue); }
+        .product-info p { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+
+        .details-btn {
+            color: var(--accent-orange);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* --- About Section --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            background: var(--light-gray);
+        }
+
+        .about-text { flex: 1; }
+        .about-img {
+            flex: 1;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1581094288338-2314dddb7903?auto=format&fit=crop&q=80&w=1000') center/cover;
+            border-left: 10px solid var(--accent-orange);
+        }
+
+        /* --- Contact Section --- */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .contact-form input:focus { border-color: var(--accent-orange); }
+
+        .contact-info i {
+            color: var(--accent-orange);
+            margin-right: 10px;
+            width: 25px;
+        }
+        
+        body.rtl .contact-info i {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 50px 10%;
+            text-align: center;
+            border-top: 5px solid var(--accent-orange);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .about-container { flex-direction: column; }
+            .about-img { width: 100%; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">GOERGE <span>| جورج</span></a>
+        <ul class="nav-links">
+            <li><a href="#home" data-key="nav-home">Home</a></li>
+            <li><a href="#products" data-key="nav-products">Products</a></li>
+            <li><a href="#about" data-key="nav-about">About</a></li>
+            <li><a href="#contact" data-key="nav-contact">Contact</a></li>
+        </ul>
+        <button class="lang-toggle" onclick="toggleLanguage()">العربية</button>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 data-key="hero-title">GOERGE | جورج</h1>
+        <p data-key="hero-sub">Engineering Pipes & Industrial Solutions</p>
+        <a href="#products" class="cta-btn" data-key="hero-cta">View Products</a>
+    </section>
+
+    <section class="section-padding" id="products">
+        <h2 class="section-title" data-key="prod-title">Our Products</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="product-info">
+                    <h3 data-key="p1-title">Steel Pipes</h3>
+                    <p data-key="p1-desc">High-grade carbon steel pipes for heavy industrial use.</p>
+                    <a href="#" class="details-btn" data-key="view-details">View Details</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="product-info">
+                    <h3 data-key="p2-title">PVC Pipes</h3>
+                    <p data-key="p2-desc">Durable and corrosion-resistant PVC solutions for plumbing.</p>
+                    <a href="#" class="details-btn" data-key="view-details">View Details</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=600')"></div>
+                <div class="product-info">
+                    <h3 data-key="p3-title">Industrial Fittings</h3>
+                    <p data-key="p3-desc">Precision-engineered elbows, tees, and connectors.</p>
+                    <a href="#" class="details-btn" data-key="view-details">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding about-container" id="about">
+        <div class="about-text">
+            <h2 class="section-title" style="text-align: left;" data-key="about-title">About Us</h2>
+            <p data-key="about-p">
+                GOERGE is a leading industrial supplier based in Egypt. We specialize in high-quality engineering pipes and piping components, serving major construction and infrastructure projects nationwide. Our commitment to quality ensures safety and longevity in every industrial solution we provide.
+            </p>
+        </div>
+        <div class="about-img"></div>
+    </section>
+
+    <section class="section-padding" id="contact">
+        <h2 class="section-title" data-key="nav-contact">Contact Us</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <h3 style="margin-bottom: 20px;" data-key="get-in-touch">Get In Touch</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Cairo, Egypt</p>
+                <p><i class="fas fa-phone"></i> +20 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> info@goerge-pipes.com</p>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Name" id="f-name">
+                <input type="email" placeholder="Email" id="f-email">
+                <textarea rows="5" placeholder="Message" id="f-msg"></textarea>
+                <button type="submit" class="cta-btn" style="border:none; cursor:pointer;" data-key="send">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 GOERGE | جورج. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Translation Data
+        const translations = {
+            en: {
+                "nav-home": "Home",
+                "nav-products": "Products",
+                "nav-about": "About",
+                "nav-contact": "Contact",
+                "hero-title": "GOERGE | جورج",
+                "hero-sub": "Engineering Pipes & Industrial Solutions",
+                "hero-cta": "View Products",
+                "prod-title": "Our Products",
+                "p1-title": "Steel Pipes",
+                "p1-desc": "High-grade carbon steel pipes for heavy industrial use.",
+                "p2-title": "PVC Pipes",
+                "p2-desc": "Durable and corrosion-resistant PVC solutions for plumbing.",
+                "p3-title": "Industrial Fittings",
+                "p3-desc": "Precision-engineered elbows, tees, and connectors.",
+                "view-details": "View Details",
+                "about-title": "About Us",
+                "about-p": "GOERGE is a leading industrial supplier based in Egypt. We specialize in high-quality engineering pipes and piping components, serving major construction and infrastructure projects nationwide.",
+                "get-in-touch": "Get In Touch",
+                "send": "Send Message",
+                "toggle": "العربية"
+            },
+            ar: {
+                "nav-home": "الرئيسية",
+                "nav-products": "المنتجات",
+                "nav-about": "من نحن",
+                "nav-contact": "اتصل بنا",
+                "hero-title": "جورج | GOERGE",
+                "hero-sub": "أنابيب هندسية وحلول صناعية متكاملة",
+                "hero-cta": "تصفح المنتجات",
+                "prod-title": "منتجاتنا",
+                "p1-title": "أنابيب فولاذية",
+                "p1-desc": "مواسير كربون صلب عالية الجودة للاستخدامات الصناعية الثقيلة.",
+                "p2-title": "مواسير PVC",
+                "p2-desc": "حلول PVC متينة ومقاومة للتآكل لأنظمة السباكة.",
+                "p3-title": "وصلات صناعية",
+                "p3-desc": "وصلات ومحابس مصممة بدقة عالية للمشاريع الكبرى.",
+                "view-details": "عرض التفاصيل",
+                "about-title": "من نحن",
+                "about-p": "تعتبر شركة جورج من الشركات الرائدة في مجال التوريدات الصناعية في مصر. نحن متخصصون في الأنابيب الهندسية عالية الجودة، ونخدم مشاريع الإنشاءات والبنية التحتية الكبرى.",
+                "get-in-touch": "تواصل معنا",
+                "send": "إرسال الرسالة",
+                "toggle": "English"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.body.classList.toggle('rtl', currentLang === 'ar');
+            
+            // Update all text content
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                el.textContent = translations[currentLang][key];
+            });
+
+            // Update button text
+            document.querySelector('.lang-toggle').textContent = translations[currentLang].toggle;
+            
+            // Update placeholders
+            if(currentLang === 'ar') {
+                document.getElementById('f-name').placeholder = "الاسم";
+                document.getElementById('f-email').placeholder = "البريد الإلكتروني";
+                document.getElementById('f-msg').placeholder = "الرسالة";
+            } else {
+                document.getElementById('f-name').placeholder = "Name";
+                document.getElementById('f-email').placeholder = "Email";
+                document.getElementById('f-msg').placeholder = "Message";
+            }
+        }
+
+        // Scroll Reveal Animation
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
